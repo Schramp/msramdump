@@ -5,3 +5,11 @@ Clean checkin based on their tar file.
 
 Changes:
 Only checked in sources, not the binaries
+
+Altered the buildscript to download syslinux
+Added a script to generate a 200Gb disk image that can be used
+
+
+Test using:
+
+qemu-system-i386 -hda rawdisk.dd
