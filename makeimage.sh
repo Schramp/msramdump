@@ -7,8 +7,6 @@ echo -e "t\n1\n6\nw\n" | fdisk rawdisk.dd
 echo -e "t\n2\n40\nw\n" | fdisk rawdisk.dd
 echo -e "t\n3\n40\nw\n" | fdisk rawdisk.dd
 echo -e "t\n4\n40\nw\n" | fdisk rawdisk.dd
-#set the bootable flag on the first partition
-echo -e "a\n1\nw\n" | fdisk rawdisk.dd
 #print it for checking
 echo -e "p\nq\n" | fdisk rawdisk.dd
 #Add the syslinux MBR
@@ -30,7 +28,7 @@ mkdir /tmp/msramdump_disk
 #mount the partition
 mount /dev/loop0p1 /tmp/msramdump_disk
 #copy the files
-cp msramdmp.c32 syslinux.cfg /tmp/msramdump_disk/A
+cp msramdmp.c32 syslinux.cfg /tmp/msramdump_disk/
 #give the OS time to flush
 sleep 2
 sync
@@ -39,3 +37,9 @@ sleep 2
 umount /dev/loop0p1 
 #remove the loop
 losetup -d /dev/loop0
+#without the sync and sleep the bootable flag gets lost. More elegant solution
+#needed!
+sync
+sleep 2
+#set the bootable flag on the first partition
+echo -e "a\n1\nw\n" | fdisk rawdisk.dd
