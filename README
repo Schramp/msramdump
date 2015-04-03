@@ -1,0 +1,7 @@
+All credits to
+http://mcgrewsecurity.com/oldsite/projects/msramdmp.1.html
+
+Clean checkin based on their tar file.
+
+Changes:
+Only checked in sources, not the binaries
